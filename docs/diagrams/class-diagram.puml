@@ -1,0 +1,62 @@
+@startuml
+class DisplayModeManager {
+    - modes : List<DisplayMode>
+    - currentMode : DisplayMode
+    + createMode()
+    + applyMode()
+    + deleteMode()
+    + getActiveMode()
+}
+
+class DisplayMode {
+    - monitors : List<Monitor>
+    - name : String
+    - hotkey : String
+    + applySettings()
+}
+
+class Monitor {
+    - id : String
+    - position : String
+    - orientation : String
+    - resolution : String
+    - refreshRate : int
+    + setProperties()
+}
+
+class AutoDetector {
+    + detectMonitors()
+    + onChange()
+}
+
+class HotkeyManager {
+    + registerHotkey()
+    + detectHotkey()
+    + triggerMode()
+}
+
+class WindowsDisplayAPI {
+    + setDisplayConfig()
+    + getMonitorInfo()
+    + listDisplays()
+}
+
+class UIController {
+    + showModes()
+    + captureInputs()
+    + displayNotifications()
+}
+
+class SettingsManager {
+    + saveSettings()
+    + loadSettings()
+}
+
+DisplayModeManager "1" -- "*" DisplayMode
+DisplayMode "*" -- "*" Monitor
+DisplayModeManager --> HotkeyManager
+DisplayModeManager --> AutoDetector
+AutoDetector --> WindowsDisplayAPI
+UIController --> DisplayModeManager
+DisplayModeManager --> SettingsManager
+@enduml

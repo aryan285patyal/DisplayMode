@@ -1,0 +1,15 @@
++----------------------------------------------------------+
+|                   DisplayMode App                        |
+|----------------------------------------------------------|
+|                         UI Layer                         |
+|  (Frontend - minimal Windows UI for modes & hotkeys)     |
+|----------------------------------------------------------|
+|                     Application Layer                    |
+|   DisplayModeManager | HotkeyManager | AutoDetector      |
+|----------------------------------------------------------|
+|                    System Integration Layer              |
+|     WindowsDisplayAPI  |  SettingsManager (Local)        |
+|----------------------------------------------------------|
+|                    Windows OS / Hardware                 |
+|    Display Drivers, APIs (SetDisplayConfig, EnumDisplays)|
++----------------------------------------------------------+

@@ -1,0 +1,28 @@
+DisplayMode/
+│
+├── src/
+│   ├── ui/
+│   │   ├── main_window.py
+│   │   ├── mode_editor.py
+│   │   └── tray_icon.py
+│   │
+│   ├── core/
+│   │   ├── display_mode_manager.py
+│   │   ├── hotkey_manager.py
+│   │   ├── auto_detector.py
+│   │
+│   ├── system/
+│   │   ├── windows_display_api.py
+│   │   ├── settings_manager.py
+│   │
+│   └── __init__.py
+│
+├── docs/
+│   └── diagrams/
+│
+├── tests/
+│   ├── test_display_mode.py
+│   ├── test_hotkeys.py
+│   └── test_api.py
+│
+└── main.py
