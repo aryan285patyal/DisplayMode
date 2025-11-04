@@ -1,0 +1,8 @@
+customtkinter==5.2.2
+darkdetect==0.8.0
+keyboard==0.13.5
+packaging==25.0
+pypiwin32==223
+pywin32==311
+setuptools==80.9.0
+win10toast==0.9
