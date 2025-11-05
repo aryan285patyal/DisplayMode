@@ -1,4 +1,6 @@
 import customtkinter as ctk
+import json
+import os
 
 #=======================classes for which pages are still to be made===============================
 class welcome_page(ctk.CTkFrame):
@@ -53,8 +55,15 @@ class create_mode_window(ctk.CTkFrame):
         self.refresh_rate_optionmenu.set("60Hz")
         self.refresh_rate_optionmenu.pack(pady=10)
 
+        # ================= Mode Name =================
+        name_label = ctk.CTkLabel(self, text="Mode Name:", font=("Arial", 16))
+        name_label.pack(pady=(5, 5))
+
+        self.name_entry = ctk.CTkEntry(self, placeholder_text="e.g. Work Setup")
+        self.name_entry.pack(pady=(0, 30))
+
         #save mode button
-        self.save_button = ctk.CTkButton(self, text="Save Mode", command=)
+        self.save_button = ctk.CTkButton(self, text="Save Mode", command=self.action_save_mode)
         self.save_button.pack(pady=20)
 
         #the close window button
@@ -65,6 +74,43 @@ class create_mode_window(ctk.CTkFrame):
         orientation = self.orientation_optionmenu.get()
         refresh = self.refresh_rate_optionmenu.get()
         resolution = self.resolution_optionmenu.get()
+        mode_name = self.name_entry.get().strip()
+
+        # creating a mode entry in dictionary format to convert to json later
+        new_mode = {
+            "name" : mode_name,
+            "orientation" : orientation,
+            "refresh" : refresh,
+            "resolution" : resolution
+        }
+
+        if not mode_name:
+           print("please enter a valid mode name")
+           return
+        
+        file_path = "modes.json"
+        if os.path.exists(file_path):
+            with open(file_path, "r") as file:
+                try:
+                    data = json.load(file)
+                except json.JSONDecodeError:
+                    data = {"modes": []}
+        else:
+            data = {"modes":[]}
+
+        #adding the new mode and saving 
+
+        for mode in data["modes"]:# checking if the given mode name already exists
+            if mode["name"].lower() == mode_name.lower():
+                print("This mode name already exists, please create a new modename")
+                ## add code asking the user to override the mode name
+                return
+        
+        # converting to json and appending
+        data["modes"].append(new_mode)
+        with open(file_path, "w") as file:
+            json.dump(data, file, indent=4)
+
         print(f"Saved Mode with orientation:{orientation}, refresh rate:{refresh}Hz, and resolution:{resolution} ")
 
 #________main_window_elements______
